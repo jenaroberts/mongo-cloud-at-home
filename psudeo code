@@ -1,0 +1,79 @@
+// create a .env and a git ignore file
+// add .env and node_modules to .gitignore file
+//and your MONGO_URL= <mongo db url>
+// create a gateway dir, a routes dir, and a services dir
+// add a mongo.js file in gateway dir
+// install dotenv from npm = npm i dotenv
+// create a new mongoClient import mongoClient from mongodb
+//   const client = new MongoClient(process.env.MONGO_URL); grabs the mongo url from our .env file
+//  const db = client.db("db name");
+// connect to the db = await client.connect()
+//return client.db("db name");
+// // create a function to get the collection export const getCandyBarsCol = async () => {
+//   const db = await getDb();
+//   return db.collection("dbName");
+// };
+//now we have a collection reference to create a collection later on
+//in services dir make a folder called services.dbName.js
+//in the services folder, do CRUD and create 5 functions
+// two get (all && one), create, update and delete
+//create - const createObjectName = async (objectname) => {
+//   const col = await getCollectionName();
+//   const { insertedId } = await col.insertOne(objectname);
+//   return insertedId.toString();
+// };
+// export const getObject Name = async (name) => {
+//     const col = await getColName();
+//     return col.findOne({ name });
+//   };
+
+//   export const getObjectName = async () => {
+//     const col = await getColName();
+//     return col.find().toArray();
+//   };
+
+//   export const updateObject Name = async (name, update) => {
+//     const col = await getColName();
+//     await col.updateOne({ name }, update);
+//   };
+
+//   export const deleteObjectName = async (name) => {
+//     const col = await getColName();
+//     await col.deleteOne({ name });
+//     console.log("this was deleted successfully");
+//   };
+//create a route file in the route dir
+// import { Router } from "express";
+// import the crud functions into the routes file
+// export &&  create a .get router colNameRouter.get
+// candyBarsRouter.get("/candyBars", async (req, res) => {
+//     const candyBars = await getAllCandyBars();
+//     res.send(candyBars);
+//   });
+//   candyBarsRouter.get("/candyBars/:name", async (req, res) => {
+//     const candyBars = await getOneCandyBar(req.params.name);
+//     res.send(candyBars);
+//   });
+
+//   candyBarsRouter.patch("/candyBars/:name", async (req, res) => {
+//     await updateOneCandyBar(req.params.name);
+//     res.status(200);
+//   });
+//   candyBarsRouter.post("/candyBars/", async (req, res) => {
+//     await createACandyBar(req.body);
+//     res.status(200);
+//   });
+//   candyBarsRouter.delete("/candyBars/:name", async (req, res) => {
+//     await deleteOneCandyBar(req.params.name);
+//     res.status(200);
+//   });
+// in your indexedjs folder, import the routes we set up to use the crud functions we made
+// cosnt app = express
+// app.use(cors());
+// app.use(express.json())
+// app.use(candyBarsRouter)
+// app.listen(3000, () => {
+//     console.log("listening in on http://localhost:3000")
+// })
+
+// install nodemon = npm i nodemon
